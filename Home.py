@@ -24,16 +24,8 @@ st.set_page_config(
 
 ##############################################################################
 ####### HEADERS -- User input ################################################
- 
-st.title('Musterkunde Heptagon', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
-st.markdown(
-""" **Disclaimer**:  
-This app is under development. It should not be used nor shared with external stakeholders.
-Information provided here should be handled with caution and should not be used to justify a change other ressources.\n
-""")
-st.info("For any questions please contact Stephan Nef stephan.nef@student.unisg.ch.")
 
-st.warning("This page is used for a Case Study in University St.Gallen and is not ment for public distribution!")
+
 
 def check_password():
     """Returns `True` if the user had the correct password."""
@@ -75,8 +67,16 @@ if not check_password():
     st.stop()  # Do not continue if check_password is not True.
 
 
+st.title('Musterkunde Heptagon', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
 
+st.markdown(
+""" **Disclaimer**:  
+This app is under development. It should not be used nor shared with external stakeholders.
+Information provided here should be handled with caution and should not be used to justify a change other ressources.\n
+""")
+st.info("For any questions please contact Stephan Nef stephan.nef@student.unisg.ch.")
 
+st.warning("This page is used for a Case Study in University St.Gallen and is not ment for public distribution!")
 
 st.toast(
     """
