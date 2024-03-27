@@ -1,0 +1,14 @@
+streamlit
+plotly
+DateTime
+openpyxl
+streamlit-aggrid
+docx
+exception
+python-docx
+streamlit-aggrid
+docx2pdf
+XlsxWriter==3.0.9
+pandas-profiling
+streamlit-pandas-profiling
+streamlit-lottie
