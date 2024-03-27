@@ -56,7 +56,7 @@ def check_password():
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
     try:
-        st.lottie("https://lottie.host/2103d7e6-e377-4a01-8d04-1a6f2cb536a0/iP6hlgqWN7.json",height=200)
+        st.lottie("https://lottie.host/ac117e33-9c74-4286-b54c-626be36e6338/lBQP5UREoA.json",height=200)
     except:
         pass
     
