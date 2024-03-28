@@ -134,8 +134,27 @@ df = df[(df['Preis'] >= preis_range[0]) & (df['Preis'] <= preis_range[1])]
 
 
 with st.expander("🛋️ Deine gekauften Produkte [klick hier]"):
-    
-    for i in range(0,len(df)):
+    # Erstelle die Paginierungsbuttons dynamisch basierend auf der Länge des DataFrames
+   anzahl_pro_seite = 15
+   total = len(df)
+   buttons_per_row = 5
+   rows = (total // anzahl_pro_seite) + (1 if total % anzahl_pro_seite > 0 else 0)
+   
+   # Berechne die Anzahl der benötigten Buttonreihen
+   for row in range(0, rows, buttons_per_row):
+       cols = st.columns(buttons_per_row)
+       for i, col in enumerate(cols):
+           index = row + i
+           von = index * anzahl_pro_seite
+           bis = min(von + anzahl_pro_seite, total)
+           if von < total:
+               button_label = f"{von+1}-{bis}"
+               if col.button(button_label, key=f"button_{index}"):
+                   st.session_state['von'] = von
+                   st.session_state['bis'] = bis
+   
+   # Verwende die aktualisierten von- und bis-Indizes, um die angezeigten Produkte zu bestimmen
+   for i in range(st.session_state['von'], st.session_state['bis']):
         st.subheader(f"{df['Produktname'].iloc[i]}")
         st.write(f"Hersteller: {df['Hersteller'].iloc[i]}")
         st.write(f"Modell: {df['Modell'].iloc[i]}")
