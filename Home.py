@@ -132,6 +132,18 @@ df = df[(df['Preis'] >= preis_range[0]) & (df['Preis'] <= preis_range[1])]
 
 
 
+# Funktion zur sicheren Initialisierung der Paginierungsindizes
+def initialize_pagination():
+    if 'von' not in st.session_state:
+        st.session_state['von'] = 0
+    if 'bis' not in st.session_state:
+        st.session_state['bis'] = 15
+
+# Vor der Verwendung von 'von' und 'bis' sicherstellen, dass sie initialisiert sind
+initialize_pagination()
+
+
+
 
 with st.expander("🛋️ Deine gekauften Produkte [klick hier]"):
     # Erstelle die Paginierungsbuttons dynamisch basierend auf der Länge des DataFrames
