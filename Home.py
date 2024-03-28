@@ -144,27 +144,18 @@ initialize_pagination()
 
 
 with st.expander("🛋️ Deine gekauften Produkte [klick hier]"):
-    # Erstelle die Paginierungsbuttons dynamisch basierend auf der Länge des DataFrames
-   anzahl_pro_seite = 8
-   total = len(df)
-   buttons_per_row = 8
-   rows = (total // anzahl_pro_seite) + (1 if total % anzahl_pro_seite > 0 else 0)
-   
-   # Berechne die Anzahl der benötigten Buttonreihen
-   for row in range(0, rows, buttons_per_row):
-       cols = st.columns(buttons_per_row)
-       for i, col in enumerate(cols):
-           index = row + i
-           von = index * anzahl_pro_seite
-           bis = min(von + anzahl_pro_seite, total)
-           if von < total:
-               button_label = f"{von+1}-{bis}"
-               if col.button(button_label, key=f"button_{index}"):
-                   st.session_state['von'] = von
-                   st.session_state['bis'] = bis
-   
-   # Verwende die aktualisierten von- und bis-Indizes, um die angezeigten Produkte zu bestimmen
-   for i in range(st.session_state['von'], st.session_state['bis']):
+
+    max_index = len(df) - 1
+    anzahl_produkte = 5
+    
+    von, bis = st.slider(
+        'Wähle den Bereich der anzuzeigenden Produkte:',
+        0, max_index, (0, anzahl_produkte), step=anzahl_produkte
+    )
+    
+    bis = min(bis, max_index + 1)
+
+    for i in range(von, bis):
         st.subheader(f"{df['Produktname'].iloc[i]}")
         st.write(f"Hersteller: {df['Hersteller'].iloc[i]}")
         st.write(f"Modell: {df['Modell'].iloc[i]}")
@@ -177,10 +168,7 @@ with st.expander("🛋️ Deine gekauften Produkte [klick hier]"):
         schwankung = np.random.uniform(-0.4, 0.1)  
         abkaufpreis = listenpreis * (1 + schwankung)
         
-
-        
-        
-        
+       
         col1, col2 = st.columns(2)
         
         with col1:
