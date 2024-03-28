@@ -143,13 +143,11 @@ def initialize_pagination():
 initialize_pagination()
 
 
-
-
 with st.expander("🛋️ Deine gekauften Produkte [klick hier]"):
     # Erstelle die Paginierungsbuttons dynamisch basierend auf der Länge des DataFrames
-   anzahl_pro_seite = 15
+   anzahl_pro_seite = 8
    total = len(df)
-   buttons_per_row = 5
+   buttons_per_row = 8
    rows = (total // anzahl_pro_seite) + (1 if total % anzahl_pro_seite > 0 else 0)
    
    # Berechne die Anzahl der benötigten Buttonreihen
