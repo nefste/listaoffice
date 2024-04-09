@@ -142,6 +142,24 @@ def initialize_pagination():
 initialize_pagination()
 
 
+
+
+
+
+
+kpi1, kpi2, kpi3 = st.columns(3)
+kpi1.metric("Number of Products", 123)
+kpi2.metric("Commodity Potential [CHF]", "54'321 CHF")
+kpi3.metric("Rückkauf Potential 2024", "12'345 CHF")
+
+
+
+
+
+
+
+
+
 with st.expander("🛋️ Deine gekauften Produkte [klick hier]"):
     # Erstelle die Paginierungsbuttons dynamisch basierend auf der Länge des DataFrames
    anzahl_pro_seite = 8
