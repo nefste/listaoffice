@@ -26,8 +26,7 @@ st.set_page_config(
 ####### HEADERS -- User input ################################################
 
 
-
-def check_password():
+Deinedef check_password():
     """Returns `True` if the user had the correct password."""
 
     def password_entered():
@@ -303,9 +302,8 @@ with st.expander("💰 Unsere geplanten Rückkaufaktionen [klick hier]"):
                       x_start=df_gantt['Rückkauf Aktion'].apply(lambda x: x[0]),
                       x_end=df_gantt['Rückkauf Aktion'].apply(lambda x: x[1]),
                       y='Produktname',
-                      color='DeineMetrikSpalte',  # Ersetze 'DeineMetrikSpalte' durch den entsprechenden Spaltennamen
-                      title='Produkte mit Rückkaufaktion - Gantt Chart',
-                      text=df_gantt['DeineTextSpalte'].astype(str),  # 'DeineTextSpalte' durch den tatsächlichen Spaltennamen ersetzen
+                      color='Rückkauf Aktion',
+                      title='Produkte mit Rückkaufaktion - Gantt Chart',  
                       height=750)
     
     fig.update_yaxes(autorange="reversed", type='category')
