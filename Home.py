@@ -288,13 +288,53 @@ with st.expander("💸 Ihre Comodity Entwicklung [klick hier]"):
 with st.expander("💰 Unsere geplanten Rückkaufaktionen [klick hier]"):
     st.subheader("💰 Unsere geplanten Rückkaufaktionen")
     
+    import plotly.express as px
+    import datetime as dt
+    
+    # Dein DataFrame df_gantt wird bereits vorausgesetzt
+    df_gantt = df.dropna(subset=['Rückkauf Aktion'])
+    
+    # An dieser Stelle müsstest du entscheiden, welche Spalte für die Farbgebung verwendet werden soll.
+    # Zum Beispiel: 'Preis' oder eine andere Metrik. Hier verwende ich einen Platzhalter 'DeineMetrikSpalte'.
+    # Du musst 'DeineMetrikSpalte' durch den tatsächlichen Spaltennamen ersetzen, der für die Farbgebung genutzt werden soll.
+    
+    today = dt.datetime.today()
+    fig = px.timeline(df_gantt,
+                      x_start=df_gantt['Rückkauf Aktion'].apply(lambda x: x[0]),
+                      x_end=df_gantt['Rückkauf Aktion'].apply(lambda x: x[1]),
+                      y='Produktname',
+                      color='DeineMetrikSpalte',  # Ersetze 'DeineMetrikSpalte' durch den entsprechenden Spaltennamen
+                      title='Produkte mit Rückkaufaktion - Gantt Chart',
+                      text=df_gantt['DeineTextSpalte'].astype(str),  # 'DeineTextSpalte' durch den tatsächlichen Spaltennamen ersetzen
+                      height=750)
+    
+    fig.update_yaxes(autorange="reversed", type='category')
+    fig.add_vline(x=today, line_width=2, line_color="blue")
+    
+    fig.update_layout(
+        xaxis=dict(
+            rangeslider=dict(
+                visible=True,
+            ),
+            type="date",
+            tickmode='linear',
+            dtick='M3',
+            showgrid=True,
+            gridcolor='grey',
+            gridwidth=1
+        )
+    )
+
+# Um den Plot in Streamlit darzustellen, verwendest du weiterhin:
+    st.plotly_chart(fig, use_container_width=True, sharing="streamlit")
+
     
     # Gantt-Chart für Produkte mit Rückkaufaktion
-    df_gantt = df.dropna(subset=['Rückkauf Aktion'])
-    fig = px.timeline(df_gantt, x_start=df_gantt['Rückkauf Aktion'].apply(lambda x: x[0]),
-                      x_end=df_gantt['Rückkauf Aktion'].apply(lambda x: x[1]),
-                      y='Produktname')
-    st.plotly_chart(fig)
+    # df_gantt = df.dropna(subset=['Rückkauf Aktion'])
+    # fig = px.timeline(df_gantt, x_start=df_gantt['Rückkauf Aktion'].apply(lambda x: x[0]),
+    #                   x_end=df_gantt['Rückkauf Aktion'].apply(lambda x: x[1]),
+    #                   y='Produktname')
+    # st.plotly_chart(fig)
     
     
     # Filtern der Produkte, die für eine Rückkaufaktion verfügbar sind
