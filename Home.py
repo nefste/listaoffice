@@ -26,7 +26,7 @@ st.set_page_config(
 ####### HEADERS -- User input ################################################
 
 
-Deinedef check_password():
+def check_password():
     """Returns `True` if the user had the correct password."""
 
     def password_entered():
