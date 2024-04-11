@@ -325,7 +325,7 @@ if customer:
        
        
     st.write("---")
-    st.link_button("📊 Kalkulation von Differenzausgleich","http://localhost:8501/Kalkulator")
+    st.link_button("📊 Kalkulation von Differenzausgleich","https://lo-hsg.streamlit.app/Kalkulator")
 
     
     # with st.expander("💸 Ihre Comodity Entwicklung [klick hier]"):
