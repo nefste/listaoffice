@@ -189,8 +189,8 @@ if customer:
                     except:
                         st.image("logo.jpg")
                     
-                    st.subheader("Absetzen?")
-                    check = st.checkbox("Interessiert zum Absetzen",key=f"checkbox_{i}")
+                    st.subheader("♻️ Absetzen?")
+                    check = st.toggle("Interessiert zum Absetzen",key=f"checkbox_{i}")
                     if st.session_state[f"checkbox_{i}"]:
                         number = st.number_input("Stückzahl Absatz", key=f"number_{i}",step=1)
                     
@@ -280,7 +280,7 @@ if customer:
                         st.image("logo.jpg")
                     
                     st.subheader("🛒 Beschaffen?")
-                    check = st.checkbox("Interessiert an Beschaffung",key=f"checkbox2_{i}")
+                    check = st.toggle("Interessiert an Beschaffung",key=f"checkbox2_{i}")
                     if st.session_state[f"checkbox2_{i}"]:
                         number = st.number_input("Stückzahl Absatz", key=f"number2_{i}",step=1)
                     
@@ -322,6 +322,10 @@ if customer:
                 st.write('---')
        except:
            pass
+       
+       
+    st.write("---")
+    st.link_button("📊 Kalkulation von Differenzausgleich","http://localhost:8501/Kalkulator")
 
     
     # with st.expander("💸 Ihre Comodity Entwicklung [klick hier]"):
