@@ -92,9 +92,42 @@ with st.expander("🔎 Build of Material - Einzelteile Bilanz"):
         st.markdown("##### Einzelteile Bedarf")
         st.write("🔩 2'000 Stück - M5 Schrauben")
         st.write("🪵 800 Stück - 30x30 Vollholzplatte")
-        st.write("🦿 1'400 Stück - 10x10 Chromstahl Vierkant")
+        st.write("🦿 1'600 Stück - 10x10 Chromstahl Vierkant")
         st.write("🦿 100 Stück - 30x155 Chromstahl Vierkant")
         st.write("✅ geschraubte Materialien")
+        
+        
+    # Namen der Produkte
+    produkte = ['M5 Schrauben', '30x30 Vollholzplatte', '10x10 Chromstahl Vierkant', '30x155 Chromstahl Vierkant']
+    
+    # Daten für Absatz und Bedarf
+    absatz = [1500, 200, 1400, 800]
+    bedarf = [2000, 800, 1600, 100]
+    
+    # Berechnung der Differenz zwischen Bedarf und Absatz
+    differenz = [b - a for a, b in zip(absatz, bedarf)]
+    
+    # Erstellen des Balkendiagramms zur Darstellung der Differenz
+    fig = go.Figure(data=[
+        go.Bar(name='Differenz', x=produkte, y=differenz, marker_color=['red' if x < 0 else 'green' for x in differenz])
+    ])
+    
+    # Anpassen des Layouts
+    fig.update_layout(
+        title='Diskrepanz zwischen Bedarf und Absatz pro Produkt',
+        xaxis_title='Produkte',
+        yaxis_title='Differenz (Bedarf - Absatz)',
+        barmode='group',
+        legend=dict(
+            yanchor="top",
+            y=0.99,
+            xanchor="right",
+            x=0.99
+        )
+    )
+    
+    # Anzeigen des Plots in Streamlit
+    st.plotly_chart(fig, use_container_width=True)
     
     st.info("Diese Bilanz ist eine erste Annahme und ohne Gewähr.")
 
