@@ -17,7 +17,7 @@ import plotly.graph_objects as go
 
 
 st.set_page_config(
-     page_title="Case Study HSG - Lista Office",
+     page_title="ListAnalytics",
      page_icon="https://media.licdn.com/dms/image/C4D0BAQHOoqgag237Aw/company-logo_200_200/0/1630565218537/lista_office_lo_logo?e=2147483647&v=beta&t=d6Cc2A0AK_W7Ot0IgSsGJPw5Vwer6tfxeVmJJScvMx8",
      layout="wide",
 )
