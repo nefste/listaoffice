@@ -66,21 +66,26 @@ def check_password():
 #     st.stop()  # Do not continue if check_password is not True.
 
 
+st.title('👁‍🗨 ListAnalytics Kalkulator')
+# st.write('Internes Lista Office AG Analyse Tool zur "Build of Material"-Kalkulation.')
 
-st.title('Guten Tag Stephan Nef', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
+st.subheader('👋🏻 Grüezi Sammy Sales', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
 
-st.markdown(
-""" **Disclaimer**:  
-This app is under development. It should not be used nor shared with external stakeholders.
-Information provided here should be handled with caution and should not be used to justify a change other ressources.\n
-""")
+# st.markdown(
+# """ **Disclaimer**:  
+# This app is under development. It should not be used nor shared with external stakeholders.
+# Information provided here should be handled with caution and should not be used to justify a change other ressources.\n
+# """)
 
+
+st.image("explosion.jpg", width=600)
 
 st.subheader("📰 Newsboard")
-st.success("Kunde XY hat endlich bei uns Bestellt!!!")
-st.info("Neue öffentliche Ausschreibung vom Kantonsspital St.Gallen")
-st.warning("Alle Vertriebler bitte ihre Kunden über unsere Betriebsferien informieren")
-st.success("Peter Müller hat heute Geburtstag")
+st.warning("Heute Meeting mit Kantonsspital St.Gallen - 14:30 Uhr")
+# st.success("Kunde XY hat endlich bei uns Bestellt!!!")
+# st.info("Neue öffentliche Ausschreibung vom Kantonsspital St.Gallen")
+# st.warning("Alle Vertriebler bitte ihre Kunden über unsere Betriebsferien informieren")
+# st.success("Peter Müller hat heute Geburtstag")
 st.write("---")
 
 

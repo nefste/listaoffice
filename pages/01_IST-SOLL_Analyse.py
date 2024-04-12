@@ -67,7 +67,7 @@ def check_password():
 
 
 
-st.title('Cockpit / Übersicht', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
+st.title('IST-SOLL Analyse', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
 
 
 
@@ -143,9 +143,7 @@ initialize_pagination()
 
 
 if customer: 
-    st.write("---")
-    st.title(f"👋🏻 Grüezi {customer}")
-    st.write("---")
+    st.subheader(f"Kunde: {customer}")
     st.subheader("🚚 Wähle Produkte zum Absetzen:")
     with st.expander("🛋️ Absatz Produkte [klick hier]"):
         # Erstelle die Paginierungsbuttons dynamisch basierend auf der Länge des DataFrames
@@ -201,15 +199,17 @@ if customer:
                         pass
                 
                 with col2:
-                    st.subheader("ℹ️ Infos")
+                    st.subheader("""ℹ️ Infos""")
                     st.write(f"Hersteller: {df['Hersteller'].iloc[i]}")
                     st.write(f"Modell: {df['Modell'].iloc[i]}")
                     st.write(f"Artikelnummer: {df['Artikelnummer'].iloc[i]}")
                     st.subheader("🔍 Build of Material:")
-                    st.write("🔩 5 Stück - M5 Schrauben")
-                    st.write("🪵 1 Stück - 30x30 Vollholzplatte")
-                    st.write("🦿 4 Stück - 10x10 Chromstahl Vierkant")
-                    st.write("🦿 2 Stück - 30x155 Chromstahl Vierkant")
+                    st.write("--- Tischplatte: --------------------")
+                    st.write("   🔩 5 Stück - M5 Schrauben")
+                    st.write("   🪵 1 Stück - 30x30 Vollholzplatte")
+                    st.write("--- Tischgestell: -------------------")
+                    st.write("   🦿 4 Stück - 10x10 Chromstahl Vierkant")
+                    st.write("   🦿 2 Stück - 30x155 Chromstahl Vierkant")
                     
                     # # Vergleich und Anzeige der Nachrichten
                     # if abkaufpreis < listenpreis:

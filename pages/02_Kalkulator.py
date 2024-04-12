@@ -18,7 +18,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 import time
-
+from streamlit_extras.let_it_rain import rain 
 
 st.set_page_config(
      page_title="Case Study HSG - Lista Office",
@@ -161,7 +161,7 @@ def draw_leaf_gauge(percentage):
     ))
 
     # Setze den Hintergrund der Figur auf transparent
-    fig.update_layout(paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor='rgba(0,0,0,0)', font = {'color': "darkgreen", 'family': "Arial"},height = 280)
+    fig.update_layout(paper_bgcolor = "rgba(0,0,0,0)", plot_bgcolor='rgba(0,0,0,0)', font = {'color': "darkgreen", 'family': "Arial"})
     
     return fig
 
@@ -183,35 +183,35 @@ if starten:
     
     
     st.subheader("Analyse Differenzausgleich:")
-    col1, col2, col3 = st.columns(3)
+    col1, col2, = st.columns(2)
       
+    # with col1:
+    #     st.markdown("##### Recycled Einzelteile [%]")
+    #     # Der Prozentsatz für die grüne Füllung
+    #     percentage = 70
+        
+    #     # Zeichne den Tacho-Plot mit transparentem Hintergrund
+    #     fig = draw_leaf_gauge(percentage)
+    
+    #     # Zeige den Plot in Streamlit an
+    #     st.plotly_chart(fig, use_container_width=True)
+        
     with col1:
-        st.markdown("##### Recycled Einzelteile [%]")
+        st.markdown("##### Upcycled Einzelteile von Absatz [%]")
         # Der Prozentsatz für die grüne Füllung
-        percentage = 70
+        percentage = 65
         
         # Zeichne den Tacho-Plot mit transparentem Hintergrund
         fig = draw_leaf_gauge(percentage)
-    
+        
         # Zeige den Plot in Streamlit an
         st.plotly_chart(fig, use_container_width=True)
-        
+    
+    
     with col2:
-        st.markdown("##### Upcycled Einzelteile [%]")
+        st.markdown("##### Upcycled Einzelteile in Bedarf [%]")
         # Der Prozentsatz für die grüne Füllung
-        percentage = 82
-        
-        # Zeichne den Tacho-Plot mit transparentem Hintergrund
-        fig = draw_leaf_gauge(percentage)
-        
-        # Zeige den Plot in Streamlit an
-        st.plotly_chart(fig, use_container_width=True)
-    
-    
-    with col3:
-        st.markdown("##### Neue Einzelteile [%]")
-        # Der Prozentsatz für die grüne Füllung
-        percentage = 45
+        percentage = 35
         
         # Zeichne den Tacho-Plot mit transparentem Hintergrund
         fig = draw_leaf_gauge(percentage)
@@ -219,8 +219,14 @@ if starten:
         # Zeige den Plot in Streamlit an
         st.plotly_chart(fig, use_container_width=True)
         
-        
+    time.sleep(5)    
     st.subheader("Empfehlung basierend auf Kalkulation:")
-    st.success("✅ Wir empfehlen den Differenzausgleich zu nutzen.")
+    st.success("""✅ Wir empfehlen den Differenzausgleich zu nutzen.""")
+    rain( 
+    emoji="🍃", 
+    font_size=50,  # the size of emoji 
+    falling_speed=2,  # speed of raining 
+    animation_length=2,  # for how much time the animation will happen 
+    ) 
     
 st.write("---")
