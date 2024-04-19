@@ -13,7 +13,7 @@ import hmac
 from streamlit_lottie import st_lottie
 import numpy as np
 import plotly.graph_objects as go
-
+import base64
 
 
 st.set_page_config(
@@ -66,7 +66,7 @@ def check_password():
 #     st.stop()  # Do not continue if check_password is not True.
 
 
-st.title('👁‍🗨 ListAnalytics Kalkulator')
+# st.title('👁‍🗨 ListAnalytics Kalkulator')
 # st.write('Internes Lista Office AG Analyse Tool zur "Build of Material"-Kalkulation.')
 
 st.subheader('👋🏻 Grüezi Sammy Sales', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
@@ -77,8 +77,17 @@ st.subheader('👋🏻 Grüezi Sammy Sales', help="Weils mit dem HSG Square nich
 # Information provided here should be handled with caution and should not be used to justify a change other ressources.\n
 # """)
 
+file_ = open("animation_explode_small.gif", "rb")
+contents = file_.read()
+data_url = base64.b64encode(contents).decode("utf-8")
+file_.close()
 
-st.image("explosion.jpg", width=600)
+st.markdown(
+    f'<img src="data:image/gif;base64,{data_url}" alt="cat gif" style="width: 800px;">',
+    unsafe_allow_html=True
+)
+
+
 
 st.subheader("📰 Newsboard")
 st.warning("Heute Meeting mit Kantonsspital St.Gallen - 14:30 Uhr")
