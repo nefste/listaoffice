@@ -233,65 +233,77 @@ if starten:
     animation_length=2,  # for how much time the animation will happen 
     ) 
     
-st.write("---")
+    st.write("---")
 
 
-
-
-# Email details
-subject = "ListAnalytics Angebot - Swisscom"
-to = "ann-kathrin.koepple@student.unisg.ch; stephan.nef@student.unisg.ch"
-body = """Hallo Karin Kunde - Swisscom
-
-Danke für Ihr interesse an Lista Office Möbel. 
-Es freut uns das wir Ihnen ein attraktives Angebot dank dem ListAnalytics Kalkulator rechnen konnten. 
-
-**********************************************************
-Gerne sende ich Ihnen folgendes Angebot:
-
----------------------------------------------------------- 
-- Rücknahmen von:
-    - 50 Stück LO Pure Tischen 
+    st.subheader("Kostenersparnis")
     
-- Kauf von: 
-    - 60 LO Extend Tischen
-    Preis Listenpreis: 450.00 CHF/Stück
-    Reduktion aufgrund Rücknahme: 15% Discount
-----------------------------------------------------------  
+    col11, col22, = st.columns(2)
     
-Total Kosten: 22’950 CHF (ohne Mehrwertsteuer, inkl. Transport und 2 Jahre Garantie)
-
-----------------------------------------------------------
-**********************************************************
-
-
-Bitte lass uns wissen, ob weitere Informationen benötigen oder wenn wir den Auftrag für Sie vorbereiten sollen.
-
-Freundliche Grüsse,
-Sammy Sales, Lista Office AG
-
-
-----------------------------------------------------------
-Disclaimer:
-Dieses Angebot ist vertraulich und ausschließlich für den Adressaten bestimmt. Wenn Sie nicht der vorgesehene Adressat sind, informieren Sie bitte den Absender sofort und löschen Sie diese E-Mail. Eine Weitergabe, Vervielfältigung oder Nutzung des Inhalts dieser E-Mail ist ohne schriftliche Genehmigung des Absenders nicht gestattet. Dieses Angebot ist unverbindlich und freibleibend. Preise und Konditionen können sich ändern. Für Tippfehler oder Irrtümer in der Kommunikation übernimmt der Absender keine Haftung.
-----------------------------------------------------------
-
-
-
-
-"""
-
-# Encode the email components for URL use
-from urllib.parse import quote
-
-def create_mailto_link(to, subject, body):
-    subject_encoded = quote(subject)
-    body_encoded = quote(body)
-    return f"mailto:{to}?subject={subject_encoded}&body={body_encoded}"
-
-# Streamlit button to open the email in Outlook
-if st.button('Sende Angebot'):
-    link = create_mailto_link(to, subject, body)
-    webbrowser.open(link)
-    st.info('Ein Outlook-Fenster sollte sich mit Ihrer E-Mail-Vorlage öffnen.')
+    with col11:
+        st.metric("Listenpreis", value="27'000 CHF")
+        
+    
+    with col22:
+        st.metric("Angebotspreis", value="22’950 CHF", delta="-15%", delta_color="inverse")
+    
+    st.success("Disscount von 15% im Angebot vorhanden, Ersparnis von 4'050 CHF")
+        
+    
+    # Email details
+    subject = "ListAnalytics Angebot - Swisscom"
+    to = "ann-kathrin.koepple@student.unisg.ch; stephan.nef@student.unisg.ch"
+    body = """Hallo Karin Kunde - Swisscom
+    
+    Danke für Ihr interesse an Lista Office Möbel. 
+    Es freut uns das wir Ihnen ein attraktives Angebot dank dem ListAnalytics Kalkulator rechnen konnten. 
+    
+    **********************************************************
+    Gerne sende ich Ihnen folgendes Angebot:
+    
+    ---------------------------------------------------------- 
+    - Rücknahmen von:
+        - 50 Stück LO Pure Tischen 
+        
+    - Kauf von: 
+        - 60 LO Extend Tischen
+        Preis Listenpreis: 450.00 CHF/Stück
+        Reduktion aufgrund Rücknahme: 15% Discount
+    ----------------------------------------------------------  
+        
+    Total Kosten: 22’950 CHF (ohne Mehrwertsteuer, inkl. Transport und 2 Jahre Garantie)
+    
+    ----------------------------------------------------------
+    **********************************************************
+    
+    
+    Bitte lass uns wissen, ob weitere Informationen benötigen oder wenn wir den Auftrag für Sie vorbereiten sollen.
+    
+    Freundliche Grüsse,
+    Sammy Sales, Lista Office AG
+    
+    
+    ----------------------------------------------------------
+    Disclaimer:
+    Dieses Angebot ist vertraulich und ausschließlich für den Adressaten bestimmt. Wenn Sie nicht der vorgesehene Adressat sind, informieren Sie bitte den Absender sofort und löschen Sie diese E-Mail. Eine Weitergabe, Vervielfältigung oder Nutzung des Inhalts dieser E-Mail ist ohne schriftliche Genehmigung des Absenders nicht gestattet. Dieses Angebot ist unverbindlich und freibleibend. Preise und Konditionen können sich ändern. Für Tippfehler oder Irrtümer in der Kommunikation übernimmt der Absender keine Haftung.
+    ----------------------------------------------------------
+    
+    
+    
+    
+    """
+    
+    # Encode the email components for URL use
+    from urllib.parse import quote
+    
+    def create_mailto_link(to, subject, body):
+        subject_encoded = quote(subject)
+        body_encoded = quote(body)
+        return f"mailto:{to}?subject={subject_encoded}&body={body_encoded}"
+    
+    # Streamlit button to open the email in Outlook
+    if st.button('Sende Angebot'):
+        link = create_mailto_link(to, subject, body)
+        webbrowser.open(link)
+        st.info('Ein Outlook-Fenster sollte sich mit Ihrer E-Mail-Vorlage öffnen.')
 
