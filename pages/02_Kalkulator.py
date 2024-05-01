@@ -66,8 +66,8 @@ def check_password():
     return False
 
 
-# if not check_password():
-#     st.stop()  # Do not continue if check_password is not True.
+if not check_password():
+     st.stop()  # Do not continue if check_password is not True.
 
 
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Logo_lista_office.svg/2880px-Logo_lista_office.svg.png")
