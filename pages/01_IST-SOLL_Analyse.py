@@ -196,7 +196,7 @@ if customer:
                     
                     try:
                         if st.session_state[f"number_{i}"]:
-                            st.success(f"{number} Stück von {df['Produktname'].iloc[i]} zum absetzen")
+                            st.success(fr"{number} Stück von {df['Produktname'].iloc[i]} zum absetzen")
                     except:
                         pass
                 
@@ -278,7 +278,7 @@ if customer:
                 
                 with col1:
                     try:
-                        st.image(f"product_figures/{df['Produktname'].iloc[i]}.png", width=300) # Pfad zu den Bildern anpassen
+                        st.image(fr"product_figures/{df['Produktname'].iloc[i]}.png", width=300) # Pfad zu den Bildern anpassen
                     except:
                         st.image("logo.jpg")
                     
