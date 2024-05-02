@@ -52,6 +52,8 @@ def check_password():
                     Need more help or want to share feedback? Don’t hesitate to contact me, Stephan Nef, at stephan.nef@ibm.com. 
                     Enjoy exploring! 🚀 """)
     
+    st.info("⚖️ Disclaimer: The content presented in this web application is created and owned by Stephan Nef exclusively for private and educational purposes. It has no affiliation, connection, or relation to the company 'Lista Office' whatsoever.")
+    
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
     try:
@@ -63,11 +65,11 @@ def check_password():
 
 
 if not check_password():
-     st.stop()  # Do not continue if check_password is not True.
+      st.stop()  # Do not continue if check_password is not True.
 
 
 
-st.title('IST-SOLL Analyse', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
+st.title('IST-SOLL Analyse', help="BOM-Daten entsprechen nicht der Realität😉")
 
 
 
@@ -118,14 +120,14 @@ if selected_product:
 min_preis = df['Preis'].min() if not df.empty else 0
 max_preis = df['Preis'].max() if not df.empty else 0
 
-# # Slider für die Preisspanne in der Sidebar erstellen
-# preis_range = st.sidebar.slider('Preisspanne auswählen [CHF]',
-#                                 min_value=int(min_preis),
-#                                 max_value=int(max_preis),
-#                                 value=(int(min_preis), int(max_preis)))
+# Slider für die Preisspanne in der Sidebar erstellen
+preis_range = st.sidebar.slider('Preisspanne auswählen [CHF]',
+                                min_value=int(min_preis),
+                                max_value=int(max_preis),
+                                value=(int(min_preis), int(max_preis)))
 
-# # Weitere Logik zur Anwendung der Preisspannenfilterung, falls erforderlich
-# df = df[(df['Preis'] >= preis_range[0]) & (df['Preis'] <= preis_range[1])]
+# Weitere Logik zur Anwendung der Preisspannenfilterung, falls erforderlich
+df = df[(df['Preis'] >= preis_range[0]) & (df['Preis'] <= preis_range[1])]
 
 
 
@@ -183,7 +185,7 @@ if customer:
                 
                 with col1:
                     try:
-                        st.image(f"{df['Produktname'].iloc[i]}.png", width=300) # Pfad zu den Bildern anpassen
+                        st.image(f"product_figures/{df['Produktname'].iloc[i]}.png", width=300) # Pfad zu den Bildern anpassen
                     except:
                         st.image("logo.jpg")
                     
@@ -203,6 +205,7 @@ if customer:
                     st.write(f"Hersteller: {df['Hersteller'].iloc[i]}")
                     st.write(f"Modell: {df['Modell'].iloc[i]}")
                     st.write(f"Artikelnummer: {df['Artikelnummer'].iloc[i]}")
+                    st.write(f"Listenpreis: {listenpreis} CHF")
                     st.subheader("🔍 Build of Material:")
                     st.write("--- Tischplatte: --------------------")
                     st.write("   🔩 5 Stück - M5 Schrauben")
@@ -275,7 +278,7 @@ if customer:
                 
                 with col1:
                     try:
-                        st.image(f"{df['Produktname'].iloc[i]}.png", width=300) # Pfad zu den Bildern anpassen
+                        st.image(f"product_figures/{df['Produktname'].iloc[i]}.png", width=300) # Pfad zu den Bildern anpassen
                     except:
                         st.image("logo.jpg")
                     
@@ -296,6 +299,7 @@ if customer:
                     st.write(f"Hersteller: {df['Hersteller'].iloc[i]}")
                     st.write(f"Modell: {df['Modell'].iloc[i]}")
                     st.write(f"Artikelnummer: {df['Artikelnummer'].iloc[i]}")
+                    st.write(f"Listenpreis: {listenpreis} CHF")
                     st.subheader("🔍 Build of Material:")
                     st.write("🔩 5 Stück - M5 Schrauben")
                     st.write("🪵 1 Stück - 30x30 Vollholzplatte")

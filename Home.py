@@ -52,6 +52,8 @@ def check_password():
                     Need more help or want to share feedback? Don’t hesitate to contact me, Stephan Nef, at stephan.nef@ibm.com. 
                     Enjoy exploring! 🚀 """)
     
+    st.info("⚖️ Disclaimer: The content presented in this web application is created and owned by Stephan Nef exclusively for private and educational purposes. It has no affiliation, connection, or relation to the company 'Lista Office' whatsoever.")
+    
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
     try:
@@ -62,7 +64,7 @@ def check_password():
     return False
 
 if not check_password():
-     st.stop()  # Do not continue if check_password is not True.
+      st.stop()  # Do not continue if check_password is not True.
 
 
 # st.title('👁‍🗨 ListAnalytics Kalkulator')

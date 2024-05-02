@@ -23,6 +23,7 @@ from streamlit_extras.let_it_rain import rain
 import webbrowser
 from urllib.parse import quote
 
+import socket
 
 st.set_page_config(
      page_title="ListAnalytics",
@@ -59,6 +60,8 @@ def check_password():
                     Encountering any quirks? Remember, it's just a test application and might still have a few bugs. 🐞 
                     Need more help or want to share feedback? Don’t hesitate to contact me, Stephan Nef, at stephan.nef@ibm.com. 
                     Enjoy exploring! 🚀 """)
+                    
+    st.info("⚖️ Disclaimer: The content presented in this web application is created and owned by Stephan Nef exclusively for private and educational purposes. It has no affiliation, connection, or relation to the company 'Lista Office' whatsoever.")
     
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
@@ -69,10 +72,8 @@ def check_password():
     
     return False
 
-
 if not check_password():
       st.stop()  # Do not continue if check_password is not True.
-
 
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Logo_lista_office.svg/2880px-Logo_lista_office.svg.png")
 
@@ -223,7 +224,7 @@ if starten:
         # Zeige den Plot in Streamlit an
         st.plotly_chart(fig, use_container_width=True)
         
-    time.sleep(5)    
+    # time.sleep(5)    
     st.subheader("Empfehlung basierend auf Kalkulation:")
     st.success("""✅ Wir empfehlen den Differenzausgleich zu nutzen.""")
     rain( 
@@ -283,6 +284,7 @@ Freundliche Grüsse,
 Sammy Sales, Lista Office AG
 
 
+                                                                                                    
 ----------------------------------------------------------
 Disclaimer:
 Dieses Angebot ist vertraulich und ausschließlich für den Adressaten bestimmt. Wenn Sie nicht der vorgesehene Adressat sind, informieren Sie bitte den Absender sofort und löschen Sie diese E-Mail. Eine Weitergabe, Vervielfältigung oder Nutzung des Inhalts dieser E-Mail ist ohne schriftliche Genehmigung des Absenders nicht gestattet. Dieses Angebot ist unverbindlich und freibleibend. Preise und Konditionen können sich ändern. Für Tippfehler oder Irrtümer in der Kommunikation übernimmt der Absender keine Haftung.
