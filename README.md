@@ -1,4 +1,4 @@
-# ListAnalytics Calculator (Idea Prototype)
+# ListAnalytics Calculator - Idea Prototype
 https://loxhsg.streamlit.app/
 
 Welcome to the ListAnalytics GitHub repository! 
@@ -9,7 +9,7 @@ This project is designed to support sustainable practices in furniture managemen
 ListAnalytics offers a platform to enhance transparency in furniture pricing and simplify the process of disposing of unwanted furniture. 
 The system is built with the goal of supporting circular economy principles by making it easier to source sustainable furniture through upcycling processes labeled as "remake."
 
-### Features
+### Features to Implement
 
 - **Price Transparency:** Ensures clear and fair pricing for used furniture.
 - **Ease of Disposal:** Simplifies the process of selling or donating old furniture.
