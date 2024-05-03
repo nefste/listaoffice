@@ -27,6 +27,8 @@ st.set_page_config(
 
 
 
+
+
 def check_password():
     """Returns `True` if the user had the correct password."""
 
@@ -107,6 +109,10 @@ df['Rückkauf Aktion'] = df['Rückkauf Aktion'].apply(convert_dates)
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Logo_lista_office.svg/2880px-Logo_lista_office.svg.png")
 st.sidebar.header('🔍 Filter (optional)')
 customer = st.sidebar.selectbox("Kunde", ["Kantonsspital St.Gallen", "SBB", "Swisscom", "Berner Kantonalbank"],key='customer')
+
+if 'customer' not in st.session_state:
+    st.session_state['customer'] = customer
+    
 selected_manufacturer = st.sidebar.multiselect('Hersteller auswählen', options=df['Hersteller'].unique())
 if selected_manufacturer:
     df = df[df['Hersteller'].isin(selected_manufacturer)]
@@ -132,15 +138,21 @@ df = df[(df['Preis'] >= preis_range[0]) & (df['Preis'] <= preis_range[1])]
 
 
 
-# Funktion zur sicheren Initialisierung der Paginierungsindizes
 def initialize_pagination():
     if 'von' not in st.session_state:
         st.session_state['von'] = 0
     if 'bis' not in st.session_state:
         st.session_state['bis'] = 15
 
-# Vor der Verwendung von 'von' und 'bis' sicherstellen, dass sie initialisiert sind
 initialize_pagination()
+
+def handle_button_click(von, bis):
+    st.session_state['update_needed'] = True
+    st.session_state['new_von'] = von
+    st.session_state['new_bis'] = bis
+
+
+
 
 
 
@@ -150,26 +162,35 @@ if customer:
     st.subheader("🚚 Wähle Produkte zum Absetzen:")
     with st.expander("🛋️ Absatz Produkte [klick hier]"):
         # Erstelle die Paginierungsbuttons dynamisch basierend auf der Länge des DataFrames
-       anzahl_pro_seite = 12
-       total = len(df)
-       buttons_per_row = 12
-       rows = (total // anzahl_pro_seite) + (1 if total % anzahl_pro_seite > 0 else 0)
-       
-       # Berechne die Anzahl der benötigten Buttonreihen
-       for row in range(0, rows, buttons_per_row):
-           cols = st.columns(buttons_per_row)
-           for i, col in enumerate(cols):
-               index = row + i
-               von = index * anzahl_pro_seite
-               bis = min(von + anzahl_pro_seite, total)
-               if von < total:
-                   button_label = f"{von+1}-{bis}"
-                   if col.button(button_label, key=f"button_{index}"):
-                       st.session_state['von'] = von
-                       st.session_state['bis'] = bis
-       
-       # Verwende die aktualisierten von- und bis-Indizes, um die angezeigten Produkte zu bestimmen
-       for i in range(st.session_state['von'], st.session_state['bis']):
+        von = st.session_state['von']
+        bis = st.session_state['bis']
+        total = 70  # Beispielwert für total
+        anzahl_pro_seite = 10  # Beispielwert für anzahl_pro_seite
+        
+        buttons_per_row = 7
+        rows = (total // anzahl_pro_seite) + (1 if total % anzahl_pro_seite > 0 else 0)
+        
+        for row in range(rows):
+            cols = st.columns(buttons_per_row)
+            for i, col in enumerate(cols):
+                index = row * buttons_per_row + i
+                von = index * anzahl_pro_seite
+                bis = min(von + anzahl_pro_seite, total)
+                if von < total:
+                    button_label = f"{von+1}-{bis}"
+                    if col.button(button_label, key=f"button_{index}"):
+                        handle_button_click(von, bis)
+        
+        # Außerhalb der Schleife prüfen, ob eine Aktualisierung notwendig ist
+        if st.session_state.get('update_needed', False):
+            st.session_state['von'] = st.session_state['new_von']
+            st.session_state['bis'] = st.session_state['new_bis']
+            # Reset der Markierung nach der Aktualisierung
+            del st.session_state['update_needed']
+            del st.session_state['new_von']
+            del st.session_state['new_bis']
+        # Verwende die aktualisierten von- und bis-Indizes, um die angezeigten Produkte zu bestimmen
+        for i in range(st.session_state['von'], st.session_state['bis']):
             try:
                 st.subheader(f"{df['Produktname'].iloc[i]}")
                 
