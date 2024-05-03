@@ -34,6 +34,10 @@ st.set_page_config(
 ##############################################################################
 ####### HEADERS -- User input ################################################
 
+for k, v in st.session_state.to_dict().items():
+   st.session_state[k] = v
+   
+   
 
 def check_password():
     """Returns `True` if the user had the correct password."""
@@ -85,7 +89,7 @@ st.title('📊 Kalkulator Differenzausgleich', help="Die Absatzmenge wird in sei
 
     
 if 'customer' not in st.session_state:
-    st.info("⬅️ Gehe bitte zuerst auf die IST-SOLL Analyse und wähle Kunde, Absatz und Bedarf aus. Die Seitennavigation findest du links in der Sidebar.")
+    st.info("⬅️ Gehe bitte zuerst auf die Bedarfs-Analyse und wähle Kunde, Absatz und Bedarf aus. Die Seitennavigation findest du links in der Sidebar.")
     st.stop()
 else:  
     customer = st.session_state['customer']

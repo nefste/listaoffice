@@ -26,6 +26,10 @@ st.set_page_config(
 ####### HEADERS -- User input ################################################
 
 
+for k, v in st.session_state.to_dict().items():
+   st.session_state[k] = v
+
+
 def check_password():
     """Returns `True` if the user had the correct password."""
 
