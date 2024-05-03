@@ -91,7 +91,7 @@ st.title('📊 Kalkulator Differenzausgleich', help="Die Absatzmenge wird in sei
 #     customer = st.session_state['customer']
 
 
-customer = "Swisscom"  
+st.session_state['customer'] = "Swisscom"  
     
 st.subheader(f"Kunde: {st.session_state['customer']}")
 st.write('---')
