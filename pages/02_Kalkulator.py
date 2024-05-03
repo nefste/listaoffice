@@ -78,11 +78,51 @@ if not check_password():
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Logo_lista_office.svg/2880px-Logo_lista_office.svg.png")
 
 
-st.title('📊 Kalkulator Differenzausgleich', help="")
 
-st.subheader("Kunde: Swisscom")
+st.title('📊 Kalkulator Differenzausgleich', help="Die Absatzmenge wird in seinen Einzelteilen analysiert und es wird geschaut welche Komponenten wiederverwendet werden. Dabei werden auch Aufwände wie Transportkosten, Montagekosten, Wiederaufbereitungskosten berücksichtigt. In diesem Prototyp nur eine fiktive Kalkulation zur Darstellung.")
+
+
+
+    
+if 'customer' not in st.session_state:
+    st.info("⬅️ Gehe bitte zuerst auf die IST-SOLL Analyse und wähle Kunde, Absatz und Bedarf aus. Die Seitennavigation findest du links in der Sidebar.")
+    st.stop()
+else:  
+    customer = st.session_state['customer']
+
+try:
+    st.session_state['customer'] = customer
+except:
+    pass
+    
+    
+st.subheader(f"Kunde: {st.session_state['customer']}")
+st.write('---')
+
+st.subheader("Ermittelter Absatz & Bedarf")
+
+absatz, bedarf = st.columns(2)
+
+def show_column_info(column, state_key, message):
+    with column:
+        defined = False
+        for i in range(100):
+            key = f'{state_key}_{i}'
+            if key in st.session_state:
+                st.info(st.session_state[key])
+                defined = True
+            elif not defined:
+                st.warning(message)
+                defined = True
+                break  
+
+show_column_info(absatz, 'absatz', "Wähle bitte Produkte zum Absetzen auf der Bedarfs-Analyse Seite.")
+show_column_info(bedarf, 'bedarf', "Wähle bitte Produkte zum Beschaffen auf der Bedarfs-Analyse Seite.")
+
 
 with st.expander("🔎 Build of Material - Einzelteile Bilanz"):
+    
+    st.info("Fiktive Daten zur Darstellung.")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -170,8 +210,15 @@ def draw_leaf_gauge(percentage):
     
     return fig
 
+st.write('---')
 
-starten = st.button("Kalkulation Starten")
+st.subheader("Kalkulation")
+
+with st.expander("🤔 Was wird berechnet?"):
+    st.write("Die Absatzmenge wird in seinen Einzelteilen analysiert und es wird geschaut welche Komponenten wiederverwendet werden. Dabei werden auch Aufwände wie Transportkosten, Montagekosten, Wiederaufbereitungskosten berücksichtigt. In diesem Prototyp nur eine fiktive Kalkulation zur Darstellung.")
+    
+
+starten = st.button("🤯 Kalkulation starten", help="fiktive Kalkulation zur Darstellung")
 if starten:
     with st.status("⌛ Kalkulieren..."):
         st.write("📁 Sammle Infos...")
@@ -237,7 +284,7 @@ if starten:
     st.write("---")
 
 
-    st.subheader("Kostenersparnis")
+    st.subheader("💰 Kostenersparnis")
     
     col11, col22, = st.columns(2)
     
@@ -249,19 +296,20 @@ if starten:
         st.metric("Angebotspreis", value="22’950 CHF", delta="-4'050 CHF", delta_color="inverse")
     
     st.success("Ersparnis von 4'050 CHF")
-        
-    
+
+
+
 # Email details
-subject = "ListAnalytics Angebot - Swisscom"
+subject = f"ListAnalytics Angebot - {st.session_state['customer']}"
 to = "ann-kathrin.koepple@student.unisg.ch; stephan.nef@student.unisg.ch"
-body = """Hallo Karin Kunde - Swisscom
+body = f"""Hallo Karin Kunde - {st.session_state['customer']}
 
 Danke für Ihr interesse an Lista Office Möbel. 
 Es freut uns das wir Ihnen ein attraktives Angebot dank dem ListAnalytics Kalkulator rechnen konnten. 
 
 **********************************************************
 Gerne sende ich Ihnen folgendes Angebot:
-
+(fiktive Daten, hardcoded)
 ---------------------------------------------------------- 
 - Rücknahmen von:
     - 50 Stück LO Pure Tischen 
@@ -291,11 +339,13 @@ Dieses Angebot ist vertraulich und ausschließlich für den Adressaten bestimmt.
 ----------------------------------------------------------
 
 
-
-
 """
+
+st.write('---')
+
+st.subheader("Angebot erstellen")
  
-with st.expander("Angebot erstellen"):
+with st.expander("📧 Angebot erstellen"):
 
     def create_mailto_link(to, subject, body):
         subject_encoded = quote(subject)
@@ -303,9 +353,15 @@ with st.expander("Angebot erstellen"):
         return f"mailto:{to}?subject={subject_encoded}&body={body_encoded}"
     
     # Streamlit button to open the email in Outlook
-    if st.button('Sende Angebot'):
+    if st.button('Sende Angebot',help='Outlook öffnet sich nur wenn App lokal läuft, siehe GitHub Repo https://github.com/nefste/listaoffice'):
         starten = True
         link = create_mailto_link(to, subject, body)
         webbrowser.open(link)
         st.info('Ein Outlook-Fenster sollte sich mit Ihrer E-Mail-Vorlage öffnen.')
+    
+    email_list = to.split("; ")  # Teilt den String in eine Liste von E-Mail-Adressen
+    selected_emails = st.multiselect("Mail an:", email_list, default=email_list) 
+
+    st.text_area("Betreff:", subject,height=20)
+    st.text_area("Angebots Mail zum bearbeiten:",body, height=450)
 

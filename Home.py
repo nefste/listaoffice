@@ -52,8 +52,8 @@ def check_password():
                     Need more help or want to share feedback? Don’t hesitate to contact me, Stephan Nef, at stephan.nef@ibm.com. 
                     Enjoy exploring! 🚀 """)
     
-    st.info("⚖️ Disclaimer: The content presented in this web application is created and owned by Stephan Nef exclusively for private and educational purposes. It has no affiliation, connection, or relation to the company 'Lista Office' whatsoever.")
-    
+    st.info("⚖️ Disclaimer: The content presented in this web application is created and owned by Stephan Nef exclusively for private and educational purposes. It has no affiliation, connection, or relation to the stated company or its products whatsoever.")
+    st.write("🛈 https://github.com/nefste/listaoffice")
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
     try:
@@ -70,7 +70,8 @@ if not check_password():
 # st.title('👁‍🗨 ListAnalytics Kalkulator')
 # st.write('Internes Lista Office AG Analyse Tool zur "Build of Material"-Kalkulation.')
 
-st.subheader('👋🏻 Grüezi Sammy Sales', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
+st.title('👋🏻 Grüezi Sammy Sales', help="Weils mit dem HSG Square nicht funktioniert hat.😉")
+
 
 # st.markdown(
 # """ **Disclaimer**:  
@@ -89,9 +90,9 @@ st.markdown(
 )
 
 
-
+st.write("---")
 st.subheader("📰 Newsboard")
-st.warning("Heute Meeting mit Kantonsspital St.Gallen - 14:30 Uhr")
+st.warning("Heute Meeting mit Swisscom, St.Gallen - 14:30 Uhr")
 # st.success("Kunde XY hat endlich bei uns Bestellt!!!")
 # st.info("Neue öffentliche Ausschreibung vom Kantonsspital St.Gallen")
 # st.warning("Alle Vertriebler bitte ihre Kunden über unsere Betriebsferien informieren")
@@ -128,6 +129,8 @@ df['Rückkauf Aktion'] = df['Rückkauf Aktion'].apply(convert_dates)
 
 # Streamlit Sidebar für Filter
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Logo_lista_office.svg/2880px-Logo_lista_office.svg.png")
+
+st.sidebar.write("🛈 https://github.com/nefste/listaoffice")
 
     
     

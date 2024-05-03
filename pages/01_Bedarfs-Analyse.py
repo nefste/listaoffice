@@ -69,7 +69,7 @@ if not check_password():
 
 
 
-st.title('IST-SOLL Analyse', help="BOM-Daten entsprechen nicht der Realität😉")
+st.title('Bedarfs-Analyse', help="BOM-Daten entsprechen nicht der Realität😉")
 
 
 
@@ -105,7 +105,7 @@ df['Rückkauf Aktion'] = df['Rückkauf Aktion'].apply(convert_dates)
 # Streamlit Sidebar für Filter
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Logo_lista_office.svg/2880px-Logo_lista_office.svg.png")
 st.sidebar.header('🔍 Filter (optional)')
-customer = st.sidebar.selectbox("Kunde", ["Kantonsspital St.Gallen", "SBB", "Swisscom", "Berner Kantonalbank"])
+customer = st.sidebar.selectbox("Kunde", ["Kantonsspital St.Gallen", "SBB", "Swisscom", "Berner Kantonalbank"],key='customer')
 selected_manufacturer = st.sidebar.multiselect('Hersteller auswählen', options=df['Hersteller'].unique())
 if selected_manufacturer:
     df = df[df['Hersteller'].isin(selected_manufacturer)]
@@ -196,23 +196,24 @@ if customer:
                     
                     try:
                         if st.session_state[f"number_{i}"]:
-                            st.success(fr"{number} Stück von {df['Produktname'].iloc[i]} zum absetzen")
+                            st.session_state[f'absatz_{i}'] = fr"{number} Stück von {df['Produktname'].iloc[i]} zum absetzen"
+                            st.success(st.session_state[f'absatz_{i}'])
                     except:
                         pass
                 
                 with col2:
-                    st.subheader("""ℹ️ Infos""")
+                    st.subheader("""ℹ️ Infos""", help="fiktive Daten zur Darstellung.")
                     st.write(f"Hersteller: {df['Hersteller'].iloc[i]}")
                     st.write(f"Modell: {df['Modell'].iloc[i]}")
                     st.write(f"Artikelnummer: {df['Artikelnummer'].iloc[i]}")
                     st.write(f"Listenpreis: {listenpreis} CHF")
                     st.subheader("🔍 Build of Material:")
-                    st.write("--- Tischplatte: --------------------")
+                    st.write("--- 1. Layer --------------------")
                     st.write("   🔩 5 Stück - M5 Schrauben")
-                    st.write("   🪵 1 Stück - 30x30 Vollholzplatte")
-                    st.write("--- Tischgestell: -------------------")
+                    st.write("--- 2. Layer -------------------")
                     st.write("   🦿 4 Stück - 10x10 Chromstahl Vierkant")
                     st.write("   🦿 2 Stück - 30x155 Chromstahl Vierkant")
+                    st.write("   🔩 ...")
                     
                     # # Vergleich und Anzeige der Nachrichten
                     # if abkaufpreis < listenpreis:
@@ -289,7 +290,8 @@ if customer:
                     
                     try:
                         if st.session_state[f"number2_{i}"]:
-                            st.success(f"{number} Stück von {df['Produktname'].iloc[i]} zum beschaffen.")
+                            st.session_state[f'bedarf_{i}'] = f"{number} Stück von {df['Produktname'].iloc[i]} zum beschaffen."
+                            st.success(st.session_state[f'bedarf_{i}'])
                     except:
                         pass
     
@@ -329,7 +331,7 @@ if customer:
        
        
     st.write("---")
-    st.link_button("📊 Kalkulation von Differenzausgleich","https://lo-hsg.streamlit.app/Kalkulator")
+    # st.link_button("📊 Kalkulation von Differenzausgleich","https://lo-hsg.streamlit.app/Kalkulator")
 
     
     # with st.expander("💸 Ihre Comodity Entwicklung [klick hier]"):
