@@ -179,64 +179,6 @@ with st.expander("🔎 Build of Material (BOM) - Einzelteile Bilanz"):
     st.plotly_chart(fig, use_container_width=True)
 
     st.info("Diese Bilanz ist eine erste Annahme und ohne Gewähr.")
-    
-    
-    # Daten definieren
-    data = [['Source','Target','Value','Color','Node, Label','Link Color'],
-            [0,5,20,'#F27420','Remain+No – 28','rgba(253, 227, 212, 0.5)'],
-            [0,6,3,'#4994CE','Leave+No – 16','rgba(242, 116, 32, 1)'],
-            [0,7,5,'#FABC13','Remain+Yes – 21','rgba(253, 227, 212, 0.5)'],
-            [1,5,14,'#7FC241','Leave+Yes – 14','rgba(219, 233, 246, 0.5)'],
-            [1,6,1,'#D3D3D3','Didn’t vote in at least one referendum – 21','rgba(73, 148, 206, 1)'],
-            [1,7,1,'#8A5988','46 – No','rgba(219, 233, 246,0.5)'],
-            [2,5,3,'#449E9E','39 – Yes','rgba(250, 188, 19, 1)'],
-            [2,6,17,'#D3D3D3','14 – Don’t know / would not vote','rgba(250, 188, 19, 0.5)'],
-            [2,7,2,'','','rgba(250, 188, 19, 0.5)'],
-            [3,5,3,'','','rgba(127, 194, 65, 1)'],
-            [3,6,9,'','','rgba(127, 194, 65, 0.5)'],
-            [3,7,2,'','','rgba(127, 194, 65, 0.5)'],
-            [4,5,5,'','','rgba(211, 211, 211, 0.5)'],
-            [4,6,9,'','','rgba(211, 211, 211, 0.5)'],
-            [4,7,8,'','','rgba(211, 211, 211, 0.5)']
-            ]
-    
-    # Knoten und Links initialisieren
-    nodes = []
-    links = []
-    
-    # Daten für Knoten und Links extrahieren
-    for row in data[1:]:
-        nodes.extend([row[0], row[1]])
-        links.append({"source": row[0], "target": row[1], "value": row[2], "color": row[5]})
-    
-    # Eindeutige Knoten identifizieren
-    nodes = list(set(nodes))
-    
-    # Plot erstellen
-    fig = go.Figure(data=[go.Sankey(
-        node=dict(
-            pad=15,
-            thickness=20,
-            line=dict(color="black", width=0.5),
-            label=[data[0][4].split(' – ')[0] for _ in range(len(nodes))],
-            color=[data[0][3] for _ in range(len(nodes))]
-        ),
-        link=dict(
-            source=[link["source"] for link in links],
-            target=[link["target"] for link in links],
-            value=[link["value"] for link in links],
-            color=[link["color"] for link in links],
-        ))])
-    
-    # Plot layout anpassen
-    fig.update_layout(title_text="Sankey Diagram",
-                      font=dict(size=10, color='white'),
-                      paper_bgcolor='rgba(0,0,0,0)',
-                      plot_bgcolor='rgba(0,0,0,0)')
-    
-    # Plot anzeigen
-    st.plotly_chart(fig)
-
 
 
 
