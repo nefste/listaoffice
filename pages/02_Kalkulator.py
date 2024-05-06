@@ -97,7 +97,7 @@ st.subheader(f"Kunde: {st.session_state['customer']}")
 st.write('---')
 
 st.subheader("Ermittelter Absatz & Bedarf")
-st.write("...da hat es noch ein Bug, einfach weitermachen. 😉")
+st.write("⚠️ ...da hat es noch ein Bug, einfach weitermachen. 😉")
 absatz, bedarf = st.columns(2)
 
 def show_column_info(column, state_key, message):
@@ -117,10 +117,10 @@ show_column_info(absatz, 'absatz', "Wähle bitte Produkte zum Absetzen auf der B
 show_column_info(bedarf, 'bedarf', "Wähle bitte Produkte zum Beschaffen auf der Bedarfs-Analyse Seite.")
 
 
-with st.expander("🔎 Build of Material - Einzelteile Bilanz"):
+with st.expander("🔎 Build of Material (BOM) - Einzelteile Bilanz"):
     
     st.info("Fiktive Daten zur Darstellung.")
-    
+    st.subheader("Build of Material - Bilanz")
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("##### Einzelteile Absatz")
