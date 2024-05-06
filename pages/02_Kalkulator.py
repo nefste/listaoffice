@@ -116,6 +116,13 @@ def show_column_info(column, state_key, message):
 show_column_info(absatz, 'absatz', "Wähle bitte Produkte zum Absetzen auf der Bedarfs-Analyse Seite.")
 show_column_info(bedarf, 'bedarf', "Wähle bitte Produkte zum Beschaffen auf der Bedarfs-Analyse Seite.")
 
+with bedarf:
+    st.info("60 Stück von LO Extend zum beschaffen.")
+
+with absatz:
+    st.info("50 Stück von LO Pure zum absetzen.")
+    
+
 
 with st.expander("🔎 Build of Material (BOM) - Einzelteile Bilanz"):
     
