@@ -106,7 +106,7 @@ def show_column_info(column, state_key, message):
         for i in range(100):
             key = f'{state_key}_{i}'
             if key in st.session_state:
-                st.info(st.session_state[key])
+                # st.info(st.session_state[key])
                 defined = True
             elif not defined:
                 st.warning(message)
