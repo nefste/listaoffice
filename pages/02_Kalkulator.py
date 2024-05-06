@@ -97,7 +97,7 @@ st.subheader(f"Kunde: {st.session_state['customer']}")
 st.write('---')
 
 st.subheader("Ermittelter Absatz & Bedarf")
-
+st.write("...da hat es noch ein Bug, einfach weitermachen. 😉")
 absatz, bedarf = st.columns(2)
 
 def show_column_info(column, state_key, message):
