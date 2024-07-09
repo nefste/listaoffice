@@ -1,7 +1,8 @@
 # ListAnalytics Calculator - Idea Prototype
 https://loxhsg.streamlit.app/
-[!WARNING]
-This prototype has been developed within a University Course and is not an official work or product of Lista Office.
+
+> [!WARNING]
+> This prototype has been developed within a University Course and is not an official work or product of Lista Office.
 
 
 Welcome to the ListAnalytics GitHub repository! 
