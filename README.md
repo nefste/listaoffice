@@ -1,5 +1,8 @@
 # ListAnalytics Calculator - Idea Prototype
 https://loxhsg.streamlit.app/
+[!WARNING]
+This prototype has been developed within a University Course and is not an official work or product of Lista Office.
+
 
 Welcome to the ListAnalytics GitHub repository! 
 This project is designed to support sustainable practices in furniture management through a Streamlit-based application that helps users manage the lifecycle of furniture by providing tools for upcycling, selling, and donating old or no longer needed furniture.
